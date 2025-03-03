@@ -5,6 +5,7 @@ target/
 
 ### IntelliJ IDEA ###
 .idea/
+.mvn/
 
 ### Eclipse ###
 .apt_generated
