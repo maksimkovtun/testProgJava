@@ -5,19 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df6afa3e-3c39-4c92-add7-44ff252ac6b4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/program/testProgJava/TestProgJavaApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/program/testProgJava/TestProgJavaApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/program/testProgJava/controllers/HTMLController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/program/testProgJava/entities/ElectronicsProductStoreLinkEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/program/testProgJava/entities/ElectronicsProductStoreLinkEntityPK.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/program/testProgJava/entities/ElectronicsProductsEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/program/testProgJava/entities/ElectronicsTypesEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/program/testProgJava/entities/EmployeeElectronicsTypeLinkEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/program/testProgJava/entities/EmployeeElectronicsTypeLinkEntityPK.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/program/testProgJava/entities/EmployeesEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/program/testProgJava/entities/PositionsEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/program/testProgJava/entities/PurchaseTypesEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/program/testProgJava/entities/PurchasesEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/program/testProgJava/entities/StoresEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="HTML File" />
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -33,6 +53,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="temurin-11" />
+  </component>
   <component name="ProjectId" id="2tnfzSSmJUJodZWKCmcJ7lBBXRj" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -44,21 +67,46 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "JPA.DatabaseSchemaImportDialog": "912b2bc1-1335-458e-8c71-90cc8ce503a7",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/maksk/IdeaProjects/schoolMagazine",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.21878716",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.testRunning",
+    "spring.configuration.checksum": "614837f57b41d7cbe8ba184fc0369afa",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\maksk\IdeaProjects\testProgJava\src\main\resources\static" />
+    </key>
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="com.program.testProgJava.entities" />
+      <recent name="" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="TestProgJavaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="testProgJava" />
@@ -80,6 +128,7 @@
       <workItem from="1740993761801" duration="414000" />
       <workItem from="1740994186098" duration="68000" />
       <workItem from="1740994284955" duration="1109000" />
+      <workItem from="1740998333244" duration="13756000" />
     </task>
     <servers />
   </component>
@@ -88,5 +137,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
