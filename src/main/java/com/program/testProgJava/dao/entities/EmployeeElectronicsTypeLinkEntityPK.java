@@ -1,16 +1,16 @@
-package com.program.testProgJava.entities;
+package com.program.testProgJava.dao.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "employee_electronics_type_link", schema = "public", catalog = "testProgJava")
-@IdClass(EmployeeElectronicsTypeLinkEntityPK.class)
-public class EmployeeElectronicsTypeLinkEntity {
-
-    @Id
-    @Column(name = "electronics_type_id")
+@Embeddable
+public class EmployeeElectronicsTypeLinkEntityPK implements Serializable {
+    @Column(name = "electronics_type_id", nullable = false)
     private Long electronicsTypeId;
+
+    @Column(name = "employee_id", nullable = false)
+    private Long employeeId;
 
     public Long getElectronicsTypeId() {
         return electronicsTypeId;
@@ -19,10 +19,6 @@ public class EmployeeElectronicsTypeLinkEntity {
     public void setElectronicsTypeId(Long electronicsTypeId) {
         this.electronicsTypeId = electronicsTypeId;
     }
-
-    @Id
-    @Column(name = "employee_id")
-    private Long employeeId;
 
     public Long getEmployeeId() {
         return employeeId;
@@ -36,8 +32,9 @@ public class EmployeeElectronicsTypeLinkEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EmployeeElectronicsTypeLinkEntity that = (EmployeeElectronicsTypeLinkEntity) o;
-        return Objects.equals(electronicsTypeId, that.electronicsTypeId) && Objects.equals(employeeId, that.employeeId);
+        EmployeeElectronicsTypeLinkEntityPK that = (EmployeeElectronicsTypeLinkEntityPK) o;
+        return Objects.equals(electronicsTypeId, that.electronicsTypeId) &&
+                Objects.equals(employeeId, that.employeeId);
     }
 
     @Override

@@ -1,37 +1,41 @@
-package com.program.testProgJava.entities;
+package com.program.testProgJava.dao.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
+enum Gender{
+    MALE, FEMALE;
+}
 @Entity
 @Table(name = "employees", schema = "public", catalog = "testProgJava")
 public class EmployeesEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "employee_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_id", nullable = false)
     private Long employeeId;
-    @Basic
-    @Column(name = "last_name")
+
+    @Column(name = "last_name", nullable = false, length = 50)
     private String lastName;
-    @Basic
-    @Column(name = "first_name")
+
+    @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
-    @Basic
-    @Column(name = "middle_name")
+
+    @Column(name = "middle_name", length = 50)
     private String middleName;
-    @Basic
-    @Column(name = "birth_date")
+
+    @Column(name = "birth_date", nullable = false)
     private Date birthDate;
-    @Basic
-    @Column(name = "position_id")
+
+    @Column(name = "position_id", nullable = false)
     private Long positionId;
-    @Basic
-    @Column(name = "store_id")
+
+    @Column(name = "store_id", nullable = false)
     private Long storeId;
-    @Basic
-    @Column(name = "gender")
-    private Boolean gender;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender", nullable = false)
+    private Gender gender;
 
     public Long getEmployeeId() {
         return employeeId;
@@ -89,11 +93,11 @@ public class EmployeesEntity {
         this.storeId = storeId;
     }
 
-    public Boolean getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(Boolean gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -102,11 +106,11 @@ public class EmployeesEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EmployeesEntity that = (EmployeesEntity) o;
-        return Objects.equals(employeeId, that.employeeId) && Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName) && Objects.equals(middleName, that.middleName) && Objects.equals(birthDate, that.birthDate) && Objects.equals(positionId, that.positionId) && Objects.equals(storeId, that.storeId) && Objects.equals(gender, that.gender);
+        return Objects.equals(employeeId, that.employeeId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(employeeId, lastName, firstName, middleName, birthDate, positionId, storeId, gender);
+        return Objects.hash(employeeId);
     }
 }

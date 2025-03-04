@@ -1,4 +1,4 @@
-package com.program.testProgJava.entities;
+package com.program.testProgJava.dao.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +11,29 @@ public class ElectronicsProductStoreLinkEntityPK implements Serializable {
 
     @Column(name = "store_id")
     private Long storeId;
+
+    public ElectronicsProductStoreLinkEntityPK() {}
+
+    public ElectronicsProductStoreLinkEntityPK(Long productId, Long storeId) {
+        this.productId = productId;
+        this.storeId = storeId;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Long storeId) {
+        this.storeId = storeId;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -25,3 +48,4 @@ public class ElectronicsProductStoreLinkEntityPK implements Serializable {
         return Objects.hash(productId, storeId);
     }
 }
+

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +11,7 @@
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">Test Store</span>
+        <span class="position-absolute top-50 start-50 translate-middle text-white">Home</span>
     </div>
 </nav>
 
@@ -51,28 +52,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Магазин-склад</td>
-                    <td>г.Новосибирск, ул. Фабричная, д.2</td>
-                    <td><button class="btn btn-sm btn-outline-primary">Просмотреть</button></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Филиал на Красном</td>
-                    <td>г.Новосибирск, Красный проспект, д.13</td>
-                    <td><button class="btn btn-sm btn-outline-primary">Просмотреть</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Филиал на Ленина</td>
-                    <td>г.Новосибирск, ул. Ленина, д.44</td>
-                    <td><button class="btn btn-sm btn-outline-primary">Просмотреть</button></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Филиал на Кирова</td>
-                    <td>г.Новосибирск, ул. Кирова, д.10</td>
+                <tr th:each="profile : ${profiles}">
+                    <td th:text="${profile.profileId}"></td>
+                    <td th:text="${profile.profileSurname}"></td>
+                    <td th:text="${profile.profileName}"></td>
                     <td><button class="btn btn-sm btn-outline-primary">Просмотреть</button></td>
                 </tr>
                 </tbody>

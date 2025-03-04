@@ -1,4 +1,4 @@
-package com.program.testProgJava.controllers;
+package com.program.testProgJava.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

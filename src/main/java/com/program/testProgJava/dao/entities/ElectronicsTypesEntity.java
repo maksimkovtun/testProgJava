@@ -1,4 +1,4 @@
-package com.program.testProgJava.entities;
+package com.program.testProgJava.dao.entities;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -6,12 +6,12 @@ import java.util.Objects;
 @Entity
 @Table(name = "electronics_types", schema = "public", catalog = "testProgJava")
 public class ElectronicsTypesEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "electronics_type_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "electronics_type_id", nullable = false)
     private Long electronicsTypeId;
-    @Basic
-    @Column(name = "name")
+
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
 
     public Long getElectronicsTypeId() {
@@ -35,11 +35,11 @@ public class ElectronicsTypesEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ElectronicsTypesEntity that = (ElectronicsTypesEntity) o;
-        return Objects.equals(electronicsTypeId, that.electronicsTypeId) && Objects.equals(name, that.name);
+        return Objects.equals(electronicsTypeId, that.electronicsTypeId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(electronicsTypeId, name);
+        return Objects.hash(electronicsTypeId);
     }
 }

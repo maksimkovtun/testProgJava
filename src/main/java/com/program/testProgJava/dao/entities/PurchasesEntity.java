@@ -1,4 +1,4 @@
-    package com.program.testProgJava.entities;
+    package com.program.testProgJava.dao.entities;
 
     import javax.persistence.*;
     import java.sql.Timestamp;
