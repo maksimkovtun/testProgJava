@@ -3,5 +3,7 @@ target/
 !**/src/test/**/target/
 .idea/
 .mvn/
+/src/test/
 mvnw
 mvnw.cmd
+
