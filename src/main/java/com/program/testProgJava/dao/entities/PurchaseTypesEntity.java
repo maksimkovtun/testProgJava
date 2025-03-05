@@ -14,6 +14,14 @@ public class PurchaseTypesEntity {
     @Column(name = "name")
     private String name;
 
+    public PurchaseTypesEntity(String purchaseTypeId, String name) {
+        this.purchaseTypeId = Long.valueOf(purchaseTypeId);
+        this.name = name;
+    }
+
+    public PurchaseTypesEntity() {
+    }
+
     public Long getPurchaseTypeId() {
         return purchaseTypeId;
     }

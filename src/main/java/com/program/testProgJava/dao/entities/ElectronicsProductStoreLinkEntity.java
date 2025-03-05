@@ -11,6 +11,15 @@ public class ElectronicsProductStoreLinkEntity {
     @Column(name = "product_id")
     private Long productId;
 
+    public ElectronicsProductStoreLinkEntity(String storeId, String productId, String quantity) {
+        this.storeId = Long.valueOf(storeId);
+        this.productId = Long.valueOf(productId);
+        this.quantity = Integer.valueOf(quantity);
+    }
+
+    public ElectronicsProductStoreLinkEntity() {
+    }
+
     public Long getProductId() {
         return productId;
     }

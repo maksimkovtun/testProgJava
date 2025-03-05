@@ -17,6 +17,14 @@ public class StoresEntity {
     @Column(name = "address")
     private String address;
 
+    public StoresEntity(String storeName, String storeAddress) {
+        this.name = storeName;
+        this.address = storeAddress;
+    }
+
+    public StoresEntity() {
+    }
+
     public Long getStoreId() {
         return storeId;
     }

@@ -14,6 +14,14 @@ public class PositionsEntity {
     @Column(name = "name")
     private String name;
 
+    public PositionsEntity(String positionId, String name) {
+        this.positionId = Long.valueOf(positionId);
+        this.name = name;
+    }
+
+    public PositionsEntity() {
+    }
+
     public Long getPositionId() {
         return positionId;
     }

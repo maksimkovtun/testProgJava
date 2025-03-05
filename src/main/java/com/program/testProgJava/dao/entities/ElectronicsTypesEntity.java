@@ -14,6 +14,14 @@ public class ElectronicsTypesEntity {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
+    public ElectronicsTypesEntity(String electronicsTypeId, String name) {
+        this.electronicsTypeId = Long.valueOf(electronicsTypeId);
+        this.name = name;
+    }
+
+    public ElectronicsTypesEntity() {
+    }
+
     public Long getElectronicsTypeId() {
         return electronicsTypeId;
     }

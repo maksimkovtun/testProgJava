@@ -37,6 +37,20 @@ public class EmployeesEntity {
     @Column(name = "gender", nullable = false)
     private Gender gender;
 
+    public EmployeesEntity(String employeeId, String lastName, String firstName, String middleName, String birthDate, String positionId, String storeId, String gender) {
+        this.employeeId = Long.valueOf(employeeId);
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.birthDate = Date.valueOf(birthDate);
+        this.positionId = Long.valueOf(positionId);
+        this.storeId = Long.valueOf(storeId);
+        this.gender = Gender.valueOf(gender);
+    }
+
+    public EmployeesEntity() {
+    }
+
     public Long getEmployeeId() {
         return employeeId;
     }

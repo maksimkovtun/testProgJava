@@ -18,14 +18,26 @@
         @Column(name = "employee_id")
         private Long employeeId;
         @Basic
-        @Column(name = "store_id")
-        private Long storeId;
-        @Basic
         @Column(name = "purchase_date")
         private Timestamp purchaseDate;
         @Basic
         @Column(name = "purchase_type_id")
         private Long purchaseTypeId;
+        @Basic
+        @Column(name = "store_id")
+        private Long storeId;
+
+        public PurchasesEntity(String purchaseId, String productId, String employeeId, String purchaseDate, String purchaseTypeId, String storeId) {
+            this.purchaseId = Long.valueOf(purchaseId);
+            this.productId = Long.valueOf(productId);
+            this.employeeId = Long.valueOf(employeeId);
+            this.purchaseDate  = Timestamp.valueOf(purchaseDate);
+            this.purchaseTypeId = Long.valueOf(purchaseTypeId);
+            this.storeId = Long.valueOf(storeId);
+        }
+
+        public PurchasesEntity() {
+        }
 
         public Long getPurchaseId() {
             return purchaseId;

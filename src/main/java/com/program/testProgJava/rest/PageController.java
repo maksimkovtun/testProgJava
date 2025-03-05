@@ -10,7 +10,7 @@ public class PageController {
     public PageController(){}
 
     @GetMapping("/")
-    public String showHomePage(){
+    public String showHomePage() {
         return "redirect:/index.html";
     }
 }

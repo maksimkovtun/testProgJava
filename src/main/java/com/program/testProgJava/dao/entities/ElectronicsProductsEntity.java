@@ -12,6 +12,19 @@ public class ElectronicsProductsEntity {
     @Column(name = "product_id")
     private Long productId;
 
+    public ElectronicsProductsEntity(String productId, String name, String electronicsTypeId, String price, String quantity, String isArchived, String description) {
+        this.productId = Long.valueOf(productId);
+        this.name = name;
+        this.electronicsTypeId = Long.valueOf(electronicsTypeId);
+        this.price = BigDecimal.valueOf(Long.parseLong(price));
+        this.quantity = Integer.valueOf(quantity);
+        this.isArchived = Boolean.valueOf(isArchived);
+        this.description = description;
+    }
+
+    public ElectronicsProductsEntity() {
+    }
+
     public Long getProductId() {
         return productId;
     }

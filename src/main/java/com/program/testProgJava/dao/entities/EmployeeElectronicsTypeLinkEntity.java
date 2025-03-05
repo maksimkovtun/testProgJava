@@ -16,6 +16,14 @@ public class EmployeeElectronicsTypeLinkEntity {
     @Column(name = "employee_id", nullable = false)
     private Long employeeId;
 
+    public EmployeeElectronicsTypeLinkEntity(String employeeId, String electronicsTypeId) {
+        this.employeeId = Long.valueOf(employeeId);
+        this.electronicsTypeId = Long.valueOf(electronicsTypeId);
+    }
+
+    public EmployeeElectronicsTypeLinkEntity() {
+    }
+
     public Long getElectronicsTypeId() {
         return electronicsTypeId;
     }
