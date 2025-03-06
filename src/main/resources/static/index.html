@@ -24,9 +24,6 @@
                 </h6>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#" data-section="stores">Магазины</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#" data-section="electronics">Электротовары</a>
                     </li>
                     <li class="nav-item">
@@ -35,8 +32,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-section="employees">Сотрудники</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-section="references">Справочники</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="referencesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Справочники
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="referencesDropdown">
+                            <li><a class="nav-link" href="#" data-section="positions">Справочник «Должности»</a></li>
+                            <li><a class="nav-link" href="#" data-section="electronics-type">Справочник «Тип электроники»</a></li>
+                            <li><a class="nav-link" href="#" data-section="stores">Справочник «Магазины»</a></li>
+                            <li><a class="nav-link" href="#" data-section="purchase-type">Справочник «Тип покупки»</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -60,9 +65,9 @@
             <button class="btn btn-primary">Добавить</button>
 
             <div class="pagination">
-                <button id="prev-page" disabled>Предыдущая</button>
+                <button id="prev-page" disabled class="btn btn-primary btn-sm">Предыдущая</button>
                 <span>Страница <span id="current-page">1</span> из <span id="total-pages">1</span></span>
-                <button id="next-page" disabled>Следующая</button>
+                <button id="next-page" class="btn btn-primary btn-sm">Следующая</button>
             </div>
 
             <h4 class="mt-4">Импорт данных из CSV-файла</h4>
