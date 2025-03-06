@@ -33,7 +33,7 @@ public class EmployeesEntity {
     @Column(name = "gender")
     private boolean gender;
 
-    public EmployeesEntity(String employeeId, String lastName, String firstName, String middleName, Date birthDate, String positionId, String storeId, String gender) {
+    public EmployeesEntity(String employeeId, String lastName, String firstName, String middleName, Date birthDate, String positionId, String storeId, boolean gender) {
         this.employeeId = Long.valueOf(employeeId);
         this.lastName = lastName;
         this.firstName = firstName;
@@ -41,7 +41,7 @@ public class EmployeesEntity {
         this.birthDate = birthDate;
         this.positionId = Long.valueOf(positionId);
         this.storeId = Long.valueOf(storeId);
-        this.gender = Boolean.parseBoolean(gender);
+        this.gender = gender;
     }
 
     public EmployeesEntity() {

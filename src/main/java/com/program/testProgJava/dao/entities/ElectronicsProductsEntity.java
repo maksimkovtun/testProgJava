@@ -36,13 +36,13 @@ public class ElectronicsProductsEntity {
     @Column(name = "description")
     private String description;
 
-    public ElectronicsProductsEntity(String productId, String name, String electronicsTypeId, String price, String quantity, String isArchived, String description) {
+    public ElectronicsProductsEntity(String productId, String name, String electronicsTypeId, String price, String quantity, boolean isArchived, String description) {
         this.productId = Long.valueOf(productId);
         this.name = name;
         this.electronicsTypeId = Long.valueOf(electronicsTypeId);
         this.price = BigDecimal.valueOf(Long.parseLong(price));
         this.quantity = Integer.valueOf(quantity);
-        this.isArchived = Boolean.valueOf(isArchived);
+        this.isArchived = isArchived;
         this.description = description;
     }
 

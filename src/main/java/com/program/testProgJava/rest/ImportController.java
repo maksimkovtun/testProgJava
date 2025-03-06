@@ -119,17 +119,19 @@ public class ImportController {
                                 .add(new PurchaseTypesEntity(columns[0], columns[1]));
                         break;
                     case "Employee.csv":
+                        boolean gender = "1".equals(columns[7]);
                         entitiesMap.computeIfAbsent("employees", k -> Collections.synchronizedList(new ArrayList<>()))
                                 .add(new EmployeesEntity(
                                         columns[0], columns[1], columns[2], columns[3],
-                                        parseDate(columns[4]), columns[5], columns[6], columns[7]
+                                        parseDate(columns[4]), columns[5], columns[6], gender
                                 ));
                         break;
                     case "ElectroItem.csv":
+                        boolean isArchived = "1".equals(columns[5]);
                         entitiesMap.computeIfAbsent("electronicsProducts", k -> Collections.synchronizedList(new ArrayList<>()))
                                 .add(new ElectronicsProductsEntity(
                                         columns[0], columns[1], columns[2],
-                                        columns[3], columns[4], columns[5], columns[6]
+                                        columns[3], columns[4], isArchived, columns[6]
                                 ));
                         break;
                     case "ElectroShop.csv":
