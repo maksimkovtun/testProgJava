@@ -17,9 +17,10 @@ public class StoresEntity {
     @Column(name = "address")
     private String address;
 
-    public StoresEntity(String storeName, String storeAddress) {
-        this.name = storeName;
-        this.address = storeAddress;
+    public StoresEntity(String storeId, String name, String address) {
+        this.storeId = Long.valueOf(storeId);
+        this.name = name;
+        this.address = address;
     }
 
     public StoresEntity() {

@@ -1,6 +1,7 @@
     package com.program.testProgJava.dao.entities;
 
     import javax.persistence.*;
+    import java.sql.Date;
     import java.sql.Timestamp;
     import java.util.Objects;
 
@@ -19,7 +20,7 @@
         private Long employeeId;
         @Basic
         @Column(name = "purchase_date")
-        private Timestamp purchaseDate;
+        private Date purchaseDate;
         @Basic
         @Column(name = "purchase_type_id")
         private Long purchaseTypeId;
@@ -27,11 +28,11 @@
         @Column(name = "store_id")
         private Long storeId;
 
-        public PurchasesEntity(String purchaseId, String productId, String employeeId, String purchaseDate, String purchaseTypeId, String storeId) {
+        public PurchasesEntity(String purchaseId, String productId, String employeeId, Date purchaseDate, String purchaseTypeId, String storeId) {
             this.purchaseId = Long.valueOf(purchaseId);
             this.productId = Long.valueOf(productId);
             this.employeeId = Long.valueOf(employeeId);
-            this.purchaseDate  = Timestamp.valueOf(purchaseDate);
+            this.purchaseDate = purchaseDate;
             this.purchaseTypeId = Long.valueOf(purchaseTypeId);
             this.storeId = Long.valueOf(storeId);
         }
@@ -71,11 +72,11 @@
             this.storeId = storeId;
         }
 
-        public Timestamp getPurchaseDate() {
+        public Date getPurchaseDate() {
             return purchaseDate;
         }
 
-        public void setPurchaseDate(Timestamp purchaseDate) {
+        public void setPurchaseDate(Date purchaseDate) {
             this.purchaseDate = purchaseDate;
         }
 

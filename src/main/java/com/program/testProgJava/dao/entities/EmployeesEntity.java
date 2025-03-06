@@ -4,9 +4,6 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
-enum Gender{
-    MALE, FEMALE;
-}
 @Entity
 @Table(name = "employees", schema = "public", catalog = "testProgJava")
 public class EmployeesEntity {
@@ -33,19 +30,18 @@ public class EmployeesEntity {
     @Column(name = "store_id", nullable = false)
     private Long storeId;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender", nullable = false)
-    private Gender gender;
+    @Column(name = "gender")
+    private boolean gender;
 
-    public EmployeesEntity(String employeeId, String lastName, String firstName, String middleName, String birthDate, String positionId, String storeId, String gender) {
+    public EmployeesEntity(String employeeId, String lastName, String firstName, String middleName, Date birthDate, String positionId, String storeId, String gender) {
         this.employeeId = Long.valueOf(employeeId);
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleName = middleName;
-        this.birthDate = Date.valueOf(birthDate);
+        this.birthDate = birthDate;
         this.positionId = Long.valueOf(positionId);
         this.storeId = Long.valueOf(storeId);
-        this.gender = Gender.valueOf(gender);
+        this.gender = Boolean.parseBoolean(gender);
     }
 
     public EmployeesEntity() {
@@ -107,11 +103,11 @@ public class EmployeesEntity {
         this.storeId = storeId;
     }
 
-    public Gender getGender() {
+    public boolean getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(boolean gender) {
         this.gender = gender;
     }
 

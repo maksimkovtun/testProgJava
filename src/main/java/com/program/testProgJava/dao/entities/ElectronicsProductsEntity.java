@@ -7,10 +7,34 @@ import java.util.Objects;
 @Entity
 @Table(name = "electronics_products", schema = "public", catalog = "testProgJava")
 public class ElectronicsProductsEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     private Long productId;
+
+    @Basic
+    @Column(name = "name")
+    private String name;
+
+    @Basic
+    @Column(name = "electronics_type_id")
+    private Long electronicsTypeId;
+
+    @Basic
+    @Column(name = "price")
+    private BigDecimal price;
+
+    @Basic
+    @Column(name = "quantity")
+    private Integer quantity;
+
+    @Basic
+    @Column(name = "is_archived")
+    private Boolean isArchived;
+
+    @Basic
+    @Column(name = "description")
+    private String description;
 
     public ElectronicsProductsEntity(String productId, String name, String electronicsTypeId, String price, String quantity, String isArchived, String description) {
         this.productId = Long.valueOf(productId);
@@ -25,53 +49,13 @@ public class ElectronicsProductsEntity {
     public ElectronicsProductsEntity() {
     }
 
-    public Long getProductId() {
-        return productId;
+    public Boolean getArchived() {
+        return isArchived;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setArchived(Boolean archived) {
+        isArchived = archived;
     }
-
-    @Basic
-    @Column(name = "name")
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Basic
-    @Column(name = "electronics_type_id")
-    private Long electronicsTypeId;
-
-    public Long getElectronicsTypeId() {
-        return electronicsTypeId;
-    }
-
-    public void setElectronicsTypeId(Long electronicsTypeId) {
-        this.electronicsTypeId = electronicsTypeId;
-    }
-
-    @Basic
-    @Column(name = "price")
-    private BigDecimal price;
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    @Basic
-    @Column(name = "quantity")
-    private Integer quantity;
 
     public Integer getQuantity() {
         return quantity;
@@ -81,21 +65,38 @@ public class ElectronicsProductsEntity {
         this.quantity = quantity;
     }
 
-    @Basic
-    @Column(name = "is_archived")
-    private Boolean isArchived;
-
-    public Boolean getArchived() {
-        return isArchived;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setArchived(Boolean archived) {
-        isArchived = archived;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
-    @Basic
-    @Column(name = "description")
-    private String description;
+    public Long getElectronicsTypeId() {
+        return electronicsTypeId;
+    }
+
+    public void setElectronicsTypeId(Long electronicsTypeId) {
+        this.electronicsTypeId = electronicsTypeId;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
 
     public String getDescription() {
         return description;
