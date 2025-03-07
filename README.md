@@ -24,3 +24,4 @@
 Или через IntelliJ IDEA (com/program/testProgJava/TestProgJavaApplication.java).
 Порт задан: 80 (http://localhost/).
 Запросы для создания таблиц прикреплены к проекту в db.txt.
+Swagger: /swagger-ui/index.html
