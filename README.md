@@ -11,6 +11,8 @@
 3. Создайте базу данных в PostgreSQL, если еще не создана:
    CREATE DATABASE название_бд;
 
+4. Создайте таблицы, вписав запросы из файла db.txt.
+
 5. Убедитесь, что в файле `application.properties` указаны правильные данные для подключения к базе данных.
    spring.datasource.url=jdbc:postgresql://localhost:5432/название_бд
    spring.datasource.username=ваш_пользователь
