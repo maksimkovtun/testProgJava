@@ -214,6 +214,7 @@ async function loadTableData(section) {
 async function renderPage(section, page) {
     const start = (page - 1) * recordsPerPage;
     const end = start + recordsPerPage;
+    currentSection = section;
 
     const currentData = data[section].slice(start, end);
 
@@ -226,7 +227,7 @@ async function renderPage(section, page) {
                 <td>${store.storeId}</td>
                 <td>${store.name}</td>
                 <td>${store.address}</td>
-                <td><button class="btn btn-sm btn-outline-primary">Просмотреть</button></td>
+                <td><button class="btn btn-sm btn-outline-primary view-details" data-id="${store.storeId}">Просмотреть</button></td>
             </tr>`;
             tableBody.innerHTML += row;
         });
@@ -256,7 +257,7 @@ async function renderPage(section, page) {
                 <td>${positionName}</td>
                 <td>${storeName}</td>
                 <td>${genderText}</td>
-                <td><button class="btn btn-sm btn-outline-primary">Детали</button></td>
+                <td><button class="btn btn-sm btn-outline-primary view-details" data-id="${emp.employeeId}">Просмотреть</button></td>
             </tr>`;
             tableBody.innerHTML += row;
         });
@@ -307,7 +308,7 @@ async function renderPage(section, page) {
                 <td>${purchase.purchaseDate}</td>
                 <td>${purchaseTypeName}</td>
                 <td>${storeName}</td>
-                <td><button class="btn btn-sm btn-outline-primary">Детали</button></td>
+                <td><button class="btn btn-sm btn-outline-primary view-details" data-id="${purchase.purchaseId}">Просмотреть</button></td>
             </tr>`;
                 tableBody.innerHTML += row;
             });
@@ -329,34 +330,34 @@ async function renderPage(section, page) {
                 <td>${product.quantity}</td>
                 <td>${archivedText}</td>
                 <td>${product.description}</td>
-                <td><button class="btn btn-sm btn-outline-primary">Просмотреть</button></td>
+                <td><button class="btn btn-sm btn-outline-primary view-details" data-id="${product.productId}">Просмотреть</button></td>
             </tr>`;
             tableBody.innerHTML += row;
         });
     } else if (section === "positions") {
-        currentData.forEach(ref => {
+        currentData.forEach(position => {
             let row = `<tr>
-                <td>${ref.positionId}</td>
-                <td>${ref.name}</td>
-                <td><button class="btn btn-sm btn-outline-primary">Просмотреть</button></td>
+                <td>${position.positionId}</td>
+                <td>${position.name}</td>
+                <td><button class="btn btn-sm btn-outline-primary view-details" data-id="${position.positionId}">Просмотреть</button></td>
             </tr>`;
             tableBody.innerHTML += row;
         });
     } else if (section === "electronicsTypes") {
-        currentData.forEach(ref => {
+        currentData.forEach(et => {
             let row = `<tr>
-                <td>${ref.electronicsTypeId}</td>
-                <td>${ref.name}</td>
-                <td><button class="btn btn-sm btn-outline-primary">Просмотреть</button></td>
+                <td>${et.electronicsTypeId}</td>
+                <td>${et.name}</td>
+                <td><button class="btn btn-sm btn-outline-primary view-details" data-id="${et.electronicsTypeId}">Просмотреть</button></td>
             </tr>`;
             tableBody.innerHTML += row;
         });
     } else if (section === "purchasesTypes") {
-        currentData.forEach(ref => {
+        currentData.forEach(pt => {
             let row = `<tr>
-                <td>${ref.purchaseTypeId}</td>
-                <td>${ref.name}</td>
-                <td><button class="btn btn-sm btn-outline-primary">Просмотреть</button></td>
+                <td>${pt.purchaseTypeId}</td>
+                <td>${pt.name}</td>
+                <td><button class="btn btn-sm btn-outline-primary view-details" data-id="${pt.purchaseTypeId}">Просмотреть</button></td>
             </tr>`;
             tableBody.innerHTML += row;
         });
@@ -403,10 +404,237 @@ function addButton(section) {
     addContainer.appendChild(addButton);
 }
 
+function openUpdateForm(title, content, id) {
+    let modalContainer = document.getElementById("update-container");
+
+    if (!modalContainer) {
+        console.error("Не найден контейнер для модального окна!");
+        return;
+    }
+
+    modalContainer.innerHTML = `
+        <div class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">${title}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body">${content}</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="update-btn" data-id="${id}">Обновить</button>
+                        <button type="button" class="btn btn-danger" id="delete-btn" data-id="${id}">Удалить</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    let modal = new bootstrap.Modal(document.getElementById("updateModal"));
+    modal.show();
+
+    document.getElementById("update-btn").addEventListener("click", updateRecord);
+    document.getElementById("delete-btn").addEventListener("click", function(event) {
+        const id = event.target.dataset.id;
+        deleteRecord(id);
+    });
+
+}
+
+document.addEventListener("click", async (event) => {
+    if (event.target.classList.contains("view-details")) {
+        const id = event.target.dataset.id;
+        let details = "";
+
+        if (currentSection === "stores") {
+            const store = data.stores.find(s => s.storeId == id);
+            details = `<p><strong>Название:</strong> <input type="text" id="edit-name" value="${store.name}"></p>
+                       <p><strong>Адрес:</strong> <input type="text" id="edit-address" value="${store.address}"></p>`;
+        } else if (currentSection === "employees") {
+            const emp = data.employees.find(e => e.employeeId == id);
+            details = `
+                      <p><strong>ФИО:</strong> <input type="text" id="edit-fio" value="${emp.lastName} ${emp.firstName} ${emp.middleName}"></p>
+                      <p><strong>Должность:</strong> <input type="text" id="edit-position" value="${positionMap[emp.positionId]}"></p>
+                      <p><strong>Магазин:</strong> <input type="text" id="edit-store" value="${storesMap[emp.storeId]}"></p>
+                      <p><strong>Дата рождения:</strong> <input type="date" id="edit-birthdate" value="${emp.birthDate}"></p>
+                      <p><strong>Пол:</strong>
+                          <select id="edit-gender">
+                              <option value="1" ${emp.gender ? 'selected' : ''}>Муж.</option>
+                              <option value="0" ${!emp.gender ? 'selected' : ''}>Жен.</option>
+                          </select>
+                      </p>`;
+
+        } else if (currentSection === "purchases") {
+            const purchase = data.purchases.find(p => p.purchaseId == id);
+            details = `<p><strong>Товар:</strong> <input type="text" id="edit-product" value="${electronicsProductsMap[purchase.productId]}"></p>
+                       <p><strong>Сотрудник:</strong> <input type="text" id="edit-employee" value="${employeesMap[purchase.employeeId]}"></p>
+                       <p><strong>Дата:</strong> <input type="date" id="edit-date" value="${purchase.purchaseDate}"></p>
+                       <p><strong>Тип:</strong> <input type="text" id="edit-type" value="${purchasesTypesMap[purchase.purchaseTypeId]}"></p>
+                       <p><strong>Магазин:</strong> <input type="text" id="edit-store" value="${storesMap[purchase.storeId]}"></p>`;
+        } else if (currentSection === "electronics") {
+            const electronic = data.electronics.find(e => e.productId == id);
+            details = `<p><strong>Товар:</strong> <input type="text" id="edit-product" value="${electronic.name}"></p>
+                       <p><strong>Тип:</strong> <input type="text" id="edit-type" value="${electronicsTypesMap[electronic.electronicsTypeId]}"></p>
+                       <p><strong>Цена:</strong> <input type="number" id="edit-price" value="${electronic.price}"></p>
+                       <p><strong>Количество:</strong> <input type="number" id="edit-quantity" value="${electronic.quantity}"></p>
+                       <p><strong>Архивирован:</strong> <input type="text" id="edit-archived" value="${electronic.archived ? "Нет" : "Есть"}"></p>
+                       <p><strong>Описание:</strong> <input type="text" id="edit-description" value="${electronic.description}"></p>`;
+        } else if (currentSection === "positions") {
+            const position = data.positions.find(p => p.positionId == id);
+            details = `<p><strong>Должность:</strong> <input type="text" id="edit-position" value="${position.name}"></p>`;
+        } else if (currentSection === "electronicsTypes") {
+            const et = data.electronicsTypes.find(e => e.electronicsTypeId == id);
+            details = `<p><strong>Тип электроники:</strong> <input type="text" id="edit-type" value="${et.name}"></p>`;
+        } else if (currentSection === "purchasesTypes") {
+            const pt = data.purchasesTypes.find(p => p.purchaseTypeId == id);
+            details = `<p><strong>Тип покупки:</strong> <input type="text" id="edit-type" value="${pt.name}"></p>`;
+        }
+
+        openUpdateForm("Редактирование записи", details, id);
+    }
+});
+
+
+async function updateRecord() {
+    const id = this.dataset.id;
+    let updatedData = {};
+
+    if (currentSection === "stores") {
+        updatedData = {
+            name: document.getElementById("edit-name").value,
+            address: document.getElementById("edit-address").value
+        };
+        await updateFetch(`store/api/stores/update/${id}`, updatedData);
+    } else if (currentSection === "employees") {
+        const fioParts = document.getElementById("edit-fio").value.split(" ");
+        const positionName = document.getElementById("edit-position").value.trim();
+        const storeName = document.getElementById("edit-store").value.trim();
+        const gender = document.getElementById("edit-gender").value === "1";
+
+        updatedData = {
+            lastName: fioParts[0],
+            firstName: fioParts[1] || "",
+            middleName: fioParts[2] || "",
+            positionId: Number(Object.keys(positionMap).find(key => positionMap[key] === positionName)),
+            storeId: Number(Object.keys(storesMap).find(key => storesMap[key] === storeName)),
+            birthDate: document.getElementById("edit-birthdate").value,
+            gender: gender
+        };
+        console.log("Отправка данных:", updatedData);
+
+        await updateFetch(`store/api/employees/update/${id}`, updatedData);
+    } else if (currentSection === "purchases") {
+        updatedData = {
+            productId: Number(Object.keys(electronicsProductsMap).find(key => electronicsProductsMap[key] === document.getElementById("edit-product").value)),
+            employeeId: Number(Object.keys(employeesMap).find(key => employeesMap[key] === document.getElementById("edit-employee").value)),
+            purchaseDate: document.getElementById("edit-date").value,
+            purchaseTypeId: Number(Object.keys(purchasesTypesMap).find(key => purchasesTypesMap[key] === document.getElementById("edit-type").value)),
+            storeId: Number(Object.keys(storesMap).find(key => storesMap[key] === document.getElementById("edit-store").value))
+        };
+        await updateFetch(`store/api/purchases/update/${id}`, updatedData);
+    } else if (currentSection === "electronics") {
+        updatedData = {
+            name: document.getElementById("edit-product").value,
+            electronicsTypeId: Number(Object.keys(electronicsTypesMap).find(key => electronicsTypesMap[key] === document.getElementById("edit-type").value)),
+            price: document.getElementById("edit-price").value,
+            quantity: document.getElementById("edit-quantity").value,
+            archived: document.getElementById("edit-archived").value !== "Нет",
+            description: document.getElementById("edit-description").value
+        };
+        await updateFetch(`store/api/electronics/update/${id}`, updatedData);
+    } else if (currentSection === "positions") {
+        updatedData = {
+            name: document.getElementById("edit-position").value
+        };
+        await updateFetch(`store/api/positions/update/${id}`, updatedData);
+    } else if (currentSection === "electronicsTypes") {
+        updatedData = {
+            name: document.getElementById("edit-type").value
+        };
+        await updateFetch(`store/api/electronics/types/update/${id}`, updatedData);
+    } else if (currentSection === "purchasesTypes") {
+        updatedData = {
+            name: document.getElementById("edit-type").value
+        };
+        await updateFetch(`store/api/purchases/types/update/${id}`, updatedData);
+    }
+}
+
+async function updateFetch(link, data) {
+    try {
+        const response = await fetch(link, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            alert("Запись обновлена!");
+            const modal = bootstrap.Modal.getInstance(document.getElementById("updateModal"));
+            modal.hide();
+            document.getElementById("updateModal").remove();
+        } else {
+            alert("Ошибка при обновлении!");
+        }
+    } catch (error) {
+        console.error("Ошибка:", error);
+        alert("Ошибка при отправке запроса.");
+    }
+}
+async function deleteRecord(id) {
+    try {
+        let response;
+
+        if (currentSection === "stores") {
+            response = await fetch(`store/api/stores/delete/${id}`, {
+                method: "DELETE"
+            });
+        } else if (currentSection === "employees") {
+            response = await fetch(`store/api/employees/delete/${id}`, {
+                method: "DELETE"
+            });
+        } else if (currentSection === "purchases") {
+            response = await fetch(`store/api/purchases/delete/${id}`, {
+                method: "DELETE"
+            });
+        } else if (currentSection === "electronics") {
+            response = await fetch(`store/api/electronics/delete/${id}`, {
+                method: "DELETE"
+            });
+        } else if (currentSection === "positions") {
+            response = await fetch(`store/api/positions/delete/${id}`, {
+                method: "DELETE"
+            });
+        } else if (currentSection === "electronicsTypes") {
+            response = await fetch(`store/api/electronics/types/delete/${id}`, {
+                method: "DELETE"
+            });
+        } else if (currentSection === "purchasesTypes") {
+            response = await fetch(`store/api/purchases/types/delete/${id}`, {
+                method: "DELETE"
+            });
+        }
+
+        if (response.ok) {
+            alert("Запись удалена!");
+            const modal = bootstrap.Modal.getInstance(document.getElementById("updateModal"));
+            modal.hide();
+            document.getElementById("updateModal").remove();
+
+        } else {
+            alert("Ошибка при удалении!");
+        }
+    } catch (error) {
+        console.error("Ошибка:", error);
+    }
+}
+
 function openAddForm(section) {
     let formHtml = '';
     const closeButton = `<button id="closeModal" class="btn btn-sm btn-outline-danger" style="margin-left: 10px;">&times;</button>`;
-
 
     switch (section) {
         case 'stores':
