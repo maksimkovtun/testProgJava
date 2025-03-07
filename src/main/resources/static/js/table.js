@@ -570,20 +570,26 @@ async function updateFetch(link, data) {
             },
             body: JSON.stringify(data)
         });
-
         if (response.ok) {
             alert("Запись обновлена!");
             const modal = bootstrap.Modal.getInstance(document.getElementById("updateModal"));
             modal.hide();
             document.getElementById("updateModal").remove();
+            renderPage(currentSection, 1);
         } else {
-            alert("Ошибка при обновлении!");
+            const errorResponse = await response.json();
+            if (errorResponse && errorResponse.productId === undefined) {
+                alert("Ошибка при обновлении!");
+            } else {
+                alert("Ошибка: товар отсутствует в наличии или не найден.");
+            }
         }
     } catch (error) {
         console.error("Ошибка:", error);
         alert("Ошибка при отправке запроса.");
     }
 }
+
 async function deleteRecord(id) {
     try {
         let response;
@@ -624,6 +630,7 @@ async function deleteRecord(id) {
             modal.hide();
             document.getElementById("updateModal").remove();
 
+            renderPage(currentSection, 1);
         } else {
             alert("Ошибка при удалении!");
         }
@@ -971,7 +978,8 @@ async function saveData(url, data) {
         });
 
         if (response.ok) {
-            console.log('Данные успешно сохранены');
+            alert('Данные успешно добавлены!');
+            await renderPage(currentSection, 1);
         } else {
             console.error('Ошибка сохранения данных:', response.statusText);
         }

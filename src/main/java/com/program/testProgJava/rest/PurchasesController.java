@@ -52,11 +52,18 @@ public class PurchasesController {
     public ResponseEntity<PurchasesEntity> updatePurchase(@PathVariable Long id, @RequestBody PurchasesEntity updatedPurchase) {
         return purchasesRepository.findById(id)
                 .map(existingPurchase -> {
+                    ElectronicsProductsEntity product = electronicsProductsRepository.findById(updatedPurchase.getProductId())
+                            .orElse(null);
+                    if (product == null || product.getQuantity() == 0 || product.getArchived()) {
+                        return ResponseEntity.badRequest().body(new PurchasesEntity());
+                    }
+
                     existingPurchase.setProductId(updatedPurchase.getProductId());
                     existingPurchase.setEmployeeId(updatedPurchase.getEmployeeId());
                     existingPurchase.setPurchaseDate(updatedPurchase.getPurchaseDate());
                     existingPurchase.setPurchaseTypeId(updatedPurchase.getPurchaseTypeId());
                     existingPurchase.setStoreId(updatedPurchase.getStoreId());
+
                     purchasesRepository.save(existingPurchase);
                     return ResponseEntity.ok(existingPurchase);
                 })
