@@ -3,10 +3,7 @@ package com.program.testProgJava.rest;
 import com.program.testProgJava.dao.entities.PositionsEntity;
 import com.program.testProgJava.dao.repositories.PositionsRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
@@ -21,5 +18,31 @@ public class PositionsController {
     @GetMapping
     public ResponseEntity<List<PositionsEntity>> getAllPositions() {
         return ResponseEntity.ok(positionsRepository.findAll());
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<PositionsEntity> addPosition(@RequestBody PositionsEntity position) {
+        PositionsEntity savedPosition = positionsRepository.save(position);
+        return ResponseEntity.ok(savedPosition);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<PositionsEntity> updatePosition(@PathVariable Long id, @RequestBody PositionsEntity updatedPosition) {
+        return positionsRepository.findById(id)
+                .map(existingPosition -> {
+                    existingPosition.setName(updatedPosition.getName());
+                    positionsRepository.save(existingPosition);
+                    return ResponseEntity.ok(existingPosition);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deletePosition(@PathVariable Long id) {
+        if (positionsRepository.existsById(id)) {
+            positionsRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

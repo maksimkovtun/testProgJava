@@ -1,5 +1,7 @@
     package com.program.testProgJava.dao.entities;
 
+    import org.springframework.format.annotation.DateTimeFormat;
+
     import javax.persistence.*;
     import java.sql.Date;
     import java.util.Objects;
@@ -19,6 +21,7 @@
         private Long employeeId;
         @Basic
         @Column(name = "purchase_date")
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
         private Date purchaseDate;
         @Basic
         @Column(name = "purchase_type_id")

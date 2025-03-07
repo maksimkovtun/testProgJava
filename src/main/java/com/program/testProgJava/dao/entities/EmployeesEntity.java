@@ -1,7 +1,11 @@
 package com.program.testProgJava.dao.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +26,7 @@ public class EmployeesEntity {
     private String middleName;
 
     @Column(name = "birth_date", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
     @Column(name = "position_id", nullable = false)
@@ -85,6 +90,11 @@ public class EmployeesEntity {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public void setBirthDay(String birthDay) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.birthDate = Date.valueOf(LocalDate.parse(birthDay, formatter));
     }
 
     public Long getPositionId() {

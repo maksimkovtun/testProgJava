@@ -27,13 +27,6 @@ public class ElectronicsProductsController {
         return electronicsProductsRepository.findAll();
     }
 
-    @GetMapping("/all")
-    @Operation(summary = "Получить все товары электроники")
-    public ResponseEntity<List<ElectronicsProductsEntity>> getAllElectronicsProducts() {
-        List<ElectronicsProductsEntity> products = electronicsProductsRepository.findAll();
-        return ResponseEntity.ok(products);
-    }
-
     @GetMapping("/{id}")
     @Operation(summary = "Получить товар электроники по ID")
     public ResponseEntity<ElectronicsProductsEntity> getElectronicsProductById(@PathVariable Long id) {

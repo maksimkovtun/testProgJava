@@ -6,7 +6,7 @@ document.getElementById('upload-form').addEventListener('submit', function(event
     if (fileInput.files.length > 0) {
         formData.append("file", fileInput.files[0]);
 
-        fetch('/api/upload-zip', {
+        fetch('/store/api/upload-zip', {
             method: 'POST',
             body: formData
         })

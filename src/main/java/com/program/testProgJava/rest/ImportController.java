@@ -14,7 +14,7 @@ import java.util.concurrent.*;
 import java.util.zip.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/store/api")
 public class ImportController {
     private final StoresRepository storeRepository;
     private final ElectronicsProductStoreLinkRepository epsLinkRepository;
