@@ -1,0 +1,74 @@
+CREATE TABLE Positions (
+    position_id BIGINT PRIMARY KEY,          
+    name VARCHAR(150)                        
+);
+
+CREATE TABLE Stores (
+    store_id BIGINT PRIMARY KEY,             
+    name VARCHAR(150),                       
+    address TEXT                           
+);
+
+CREATE TABLE Electronics_Types (
+    electronics_type_id BIGINT PRIMARY KEY,  
+    name VARCHAR(150)                        
+);
+
+CREATE TABLE Purchase_Types (
+    purchase_type_id BIGINT PRIMARY KEY,     
+    name VARCHAR(150)                       
+);
+
+CREATE TABLE Employees (
+    employee_id BIGINT PRIMARY KEY,          
+    last_name VARCHAR(100),                   
+    first_name VARCHAR(100),                 
+    middle_name VARCHAR(100),               
+    birth_date DATE,                        
+    position_id BIGINT,                     
+    store_id BIGINT,                         
+    gender BOOLEAN,                          
+    FOREIGN KEY (position_id) REFERENCES Positions(position_id),
+    FOREIGN KEY (store_id) REFERENCES Stores(store_id)
+);
+
+CREATE TABLE Electronics_Products (
+    product_id BIGINT PRIMARY KEY,           
+    name VARCHAR(150),                      
+    electronics_type_id BIGINT,            
+    price DECIMAL(10, 2),                   
+    quantity INT,                            
+    is_archived BOOLEAN,                     
+    description TEXT,                       
+    FOREIGN KEY (electronics_type_id) REFERENCES Electronics_Types(electronics_type_id)
+);
+
+CREATE TABLE Purchases (
+    purchase_id BIGINT PRIMARY KEY,           
+    product_id BIGINT,                       
+    employee_id BIGINT,                      
+    store_id BIGINT,                         
+    purchase_date TIMESTAMP,                 
+    purchase_type_id BIGINT,                
+    FOREIGN KEY (product_id) REFERENCES Electronics_Products(product_id),
+    FOREIGN KEY (employee_id) REFERENCES Employees(employee_id),
+    FOREIGN KEY (store_id) REFERENCES Stores(store_id),
+    FOREIGN KEY (purchase_type_id) REFERENCES Purchase_Types(purchase_type_id)
+);
+
+CREATE TABLE Employee_Electronics_Type_Link (
+    electronics_type_id BIGINT,              
+    employee_id BIGINT,                      
+    PRIMARY KEY (electronics_type_id, employee_id), 
+    FOREIGN KEY (electronics_type_id) REFERENCES Electronics_Types(electronics_type_id),
+    FOREIGN KEY (employee_id) REFERENCES Employees(employee_id)
+);
+
+CREATE TABLE Electronics_Product_Store_Link (
+    product_id BIGINT,                        
+    store_id BIGINT,                         
+    quantity INT,                            
+    PRIMARY KEY (product_id, store_id),      
+    FOREIGN KEY (product_id) REFERENCES Electronics_Products(product_id),
+    FOREIGN KEY (store_id) REFERENCES Stores(store_id)
+);
